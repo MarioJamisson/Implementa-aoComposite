@@ -1,18 +1,47 @@
-## Getting Started
+# Exemplo de Padrão Composite
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Este projeto é um exemplo de aplicação do padrão de design **Composite** em Java. O padrão Composite permite que objetos sejam compostos em estruturas de árvore para representar hierarquias parte-todo. Com esse padrão, é possível tratar objetos individuais e composições de objetos de maneira uniforme.
 
-## Folder Structure
+## Estrutura do Código
 
-The workspace contains two folders by default, where:
+O código é composto pelas seguintes classes:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+1. **Tarefa**: Classe abstrata que define a interface para operações comuns em tarefas. Inclui métodos para adicionar, remover e exibir tarefas.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+2. **TarefaSimples**: Implementa uma tarefa simples, que não pode adicionar ou remover outras tarefas. Apenas exibe seu nome.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+3. **TarefaComposta**: Implementa uma tarefa composta que pode conter outras tarefas (simples ou compostas). Permite adicionar e remover tarefas e exibir a hierarquia de tarefas de forma recursiva.
 
-## Dependency Management
+4. **Main**: Classe principal que demonstra a utilização do padrão Composite. Cria tarefas simples e compostas, organiza-as em uma estrutura hierárquica e exibe a lista de tarefas.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Como Utilizar
+
+1. **Crie tarefas simples**:
+   ```java
+   Tarefa tarefa1 = new TarefaSimples("Comprar leite");
+   Tarefa tarefa2 = new TarefaSimples("Ler um livro");
+2. **Crie tarefas compostas e adicione tarefas simples a elas:**
+   ```java
+   TarefaComposta tarefaComposta = new TarefaComposta("Preparar para a viagem");
+   tarefaComposta.adicionar(new TarefaSimples("Reservar hotel"));
+   tarefaComposta.adicionar(new TarefaSimples("Comprar passagens"));
+3. **Crie uma lista de tarefas e adicione tarefas simples e compostas:**
+   ```java
+   TarefaComposta listaDeTarefas = new TarefaComposta("Lista de Tarefas");
+   listaDeTarefas.adicionar(tarefa1);
+   listaDeTarefas.adicionar(tarefa2);
+   listaDeTarefas.adicionar(tarefaComposta);
+4. **Exiba a lista de tarefas:**
+   ```java
+   listaDeTarefas.exibir("");
+
+##Exemplo de execução
+```java
+Lista de Tarefas:
+  Tarefa: Comprar leite
+  Tarefa: Ler um livro
+Tarefa Composta: Preparar para a viagem
+  Tarefa: Reservar hotel
+  Tarefa: Comprar passagens
+
+
